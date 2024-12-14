@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div id="container">
+        
+        <form action="" id="form">
+            <h2>Login</h2>
+            <div class="form1">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username">
+                <div class="error"></div>
+            </div>
+            <div class="form1">
+                <label for="emailId">EmailId</label>
+                <input type="email" name="email" id="email">
+                <div class="error"></div>
+            </div>
+            <div class="form1">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+                <div class="error"></div>
+            </div>
+            <div class="form1">
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" name="cpassword" id="cpassword">
+                <div class="error"></div>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>
+        const form = document.querySelector('#form1');
+const username =document.querySelector('#username');
+const email =document.querySelector('#email');
+const password =document.querySelector('#password');
+const cpassword =document.querySelector('#cpassword');
+
+form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    validateInputs();
+})
+
+function validateInputs(){
+    const usernameval=username.value.trim();
+    const emailval=email.value.trim();
+    const passwordval=password.value.trim();
+    const cpasswordval=cpassword.value.trim();
+    
+    if(usernameval==''){
+        seterror(username ,'username is required')
+    }
+    else{
+        setsuccess(username)
+    }
+
+    if(emailval==''){
+        seterror(email,'email is required')
+    }
+    else{
+        setsuccess(email)
+    }
+
+    if(passwordval ===''){
+        seterror(password,'password is required')
+    }
+    else if(passwordval.length<8){
+        seterror(password,'password must be 8 characters')
+    }
+    else{
+        setsuccess(password)
+    }
+    
+    if(cpasswordval ===''){
+        seterror(password,'confirm password is required')
+    }
+    else if(cpasswordval!==passwordval){
+        seterror(password,'password dose not match')
+    }
+    else{
+        setsuccess(cpassword)
+    }
+}
+
+function seterror(element,message){
+    const form1=element.parentElement;
+    const errorElement=form1.querySelector('.error')
+
+    errorElement.innerText='message';
+    form1.classList.add('error')
+    form1.classList.remove('success')
+}
+function setsuccess(element){
+    const form1=element.parentElement;
+    const errorElement=form1.querySelector('.error')
+
+    errorElement.innerText='';
+    form1.classList.add('success')
+    form1.classList.remove('error')
+}
+const validateEmail =(email) =>{
+    return String(email)
+    .toLowerCase()
+};
+    </script>
+</body>
+</html>
